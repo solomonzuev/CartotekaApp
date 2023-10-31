@@ -1,0 +1,45 @@
+﻿<Page x:Class="CartotekaApp.AboutPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:CartotekaApp"
+      mc:Ignorable="d" 
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      d:DesignHeight="500" d:DesignWidth="800"
+      Title="AboutPage"
+      Loaded="Page_Loaded">
+
+    <materialDesign:Card Margin="20" Padding="20" Background="White">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Border Grid.Row="1" BorderBrush="Black" BorderThickness="2" CornerRadius="30" HorizontalAlignment="Center" Padding="10" Margin="10">
+                <materialDesign:PackIcon Kind="Library" Grid.Row="1" Foreground="MediumPurple" HorizontalAlignment="Center" VerticalAlignment="Center" Width="100" Height="100"/>
+            </Border>
+
+            <TextBlock x:Name="VersionTextBlock" Grid.Row="2" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+            <TextBlock Grid.Row="3" Text="Автор: Зуев Соломон, 3ПКС" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBlock Grid.Row="5" Text="Помощь с дизайном: Вадим Никитин, 32ПКС" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <StackPanel Grid.Row="7" Margin="0 20" HorizontalAlignment="Center">
+                <TextBlock TextWrapping="Wrap" TextAlignment="Center" Text="Приложение для картотеки, которое позволяет добавлять, редактировать и удалять данные о книгах и об их закупках." FontSize="16" VerticalAlignment="Top"/>
+                <TextBlock TextWrapping="Wrap" TextAlignment="Center" Margin="0 10 0 0" Text="Подробную информацию о том, как пользоваться данным приложением вы можете получить на вкладке &quot;Руководство пользователя&quot; в боковом меню." FontSize="16" />
+            </StackPanel>
+            <TextBlock Grid.Row="8" Text="Год разработки: 2023 г." FontSize="18" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        </Grid>
+    </materialDesign:Card>
+</Page>
+
+
+

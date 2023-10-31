@@ -1,0 +1,159 @@
+﻿<UserControl x:Class="CartotekaApp.BookEditorUC"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CartotekaApp"
+             xmlns:converters="clr-namespace:CartotekaApp.Converters"
+             mc:Ignorable="d" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+             TextElement.FontWeight="Regular"
+             TextElement.FontSize="14"
+             TextOptions.TextFormattingMode="Ideal"
+             TextOptions.TextRenderingMode="Auto"
+             Background="{DynamicResource MaterialDesignPaper}"
+             FontFamily="{DynamicResource MaterialDesignFont}"
+             MinHeight="500" Width="450">
+    <UserControl.Resources>
+        <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+    </UserControl.Resources>
+    <materialDesign:Card Padding="16">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <!-- Заголовок -->
+            <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}" Text="Данные о книге" Padding="0 15" Grid.ColumnSpan="2" />
+
+            <!-- Название книги -->
+            <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                    materialDesign:HintAssist.Hint="Название книги"
+                    Text="{Binding CurrentBook.BookName}" />
+
+            <!-- Отделение -->
+            <TextBox Grid.Row="2" Grid.Column="0" 
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                    materialDesign:HintAssist.Hint="Отделение" Margin="0 10 10 0"
+                    Text="{Binding CurrentBook.Otdel}" />
+
+            <!-- Категория -->
+            <ComboBox Grid.Row="2" Grid.Column="1" 
+                      Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                      materialDesign:HintAssist.Hint="Категория" Margin="10 10 0 0" 
+                      ItemsSource="{Binding Categories}" SelectedItem="{Binding SelectedCategory}" DisplayMemberPath="CategoryName" VerticalAlignment="Top" />
+
+            <!-- Описание для книги -->
+            <TextBox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                    materialDesign:HintAssist.Hint="Описание книги" Margin="0,10,0,10"
+                    MaxHeight="100"
+                    AcceptsReturn="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"
+                    Text="{Binding CurrentBook.BookDesc}"/>
+
+            <Grid Grid.Row="4" Grid.ColumnSpan="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <StackPanel HorizontalAlignment="Left" Margin="0 10 0 0">
+                    <Button Margin="0 0 0 10" Content="Авторы" Command="{Binding AuthorsCommand}" />
+                    <Button Margin="0 0 0 10" Content="Группы" Command="{Binding GroupsCommand}" />
+                    <Button Margin="0 0 0 10" Command="{Binding KeywordsCommand}" Content="Ключ. слова" />
+
+                </StackPanel>
+                <!--<StackPanel Orientation="Horizontal" Grid.ColumnSpan="3" VerticalAlignment="Center" Margin="0 10">
+                    <RadioButton x:Name="RBtnAuthors" Margin="0 0 10 0" Content="Авторы" IsChecked="True" />
+                    <RadioButton x:Name="RBtnGroups"  Margin="0 0 10 0" Content="Группы" />
+                    <RadioButton x:Name="RBtnKeywords"  Margin="0 0 10 0" Content="Ключевые слова" />
+                </StackPanel>
+                <materialDesign:Card Grid.Row="1" Margin="0 0 10 0">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Padding="5 2" FontWeight="Bold" Text="Выбранные:" />
+
+                        <Grid Grid.Row="1">
+                            <Border BorderBrush="Gray" BorderThickness="1" CornerRadius="5"
+                                Visibility="{Binding ElementName=RBtnAuthors, Path=IsChecked, Converter={StaticResource BoolToVisibilityConverter}}">
+                                <ListBox ItemsSource="{Binding SelectedAuthors}" SelectedItem="{Binding SelectedAuthorToRemove}" DisplayMemberPath="FullName" />
+                            </Border>
+                            <Border BorderBrush="Gray" BorderThickness="1" CornerRadius="5" 
+                                Visibility="{Binding ElementName=RBtnGroups, Path=IsChecked, Converter={StaticResource BoolToVisibilityConverter}}">
+                                <ListBox ItemsSource="{Binding SelectedGroups}" SelectedItem="{Binding SelectedGroupToRemove}" DisplayMemberPath="GroupName" />
+                            </Border>
+                            <Border BorderBrush="Gray" BorderThickness="1" CornerRadius="5"
+                                Visibility="{Binding ElementName=RBtnKeywords, Path=IsChecked, Converter={StaticResource BoolToVisibilityConverter}}">
+                                <ListBox ItemsSource="{Binding SelectedKeywords}" SelectedItem="{Binding SelectedKeywordToRemove}" DisplayMemberPath="Keyword1" />
+                            </Border>
+                        </Grid>
+                    </Grid>
+                </materialDesign:Card>
+                <StackPanel Grid.Row="1" Grid.Column="1" Margin="0 20 0 0">
+                    <Button Padding="10 5" Content="&lt;&lt;" Margin="0 0 0 10" />
+                    <Button Padding="10 5" Content="&gt;&gt;" />
+                </StackPanel>
+                <materialDesign:Card Grid.Row="1" Grid.Column="2" Margin="10 0 0 0">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto" />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+
+                            <TextBlock Padding="5 2" FontWeight="Bold" Text="Доступные:" />
+
+                            <Grid Grid.Row="1">
+                                <Border BorderBrush="Gray" BorderThickness="1" CornerRadius="5"
+                                Visibility="{Binding ElementName=RBtnAuthors, Path=IsChecked, Converter={StaticResource BoolToVisibilityConverter}}">
+                                <ListBox SelectionMode="Multiple" ItemsSource="{Binding Authors}" 
+                                         SelectedItem="{Binding SelectedAuthorToAdd}" DisplayMemberPath="FullName" />
+                                </Border>
+                                <Border BorderBrush="Gray" BorderThickness="1" CornerRadius="5" 
+                                Visibility="{Binding ElementName=RBtnGroups, Path=IsChecked, Converter={StaticResource BoolToVisibilityConverter}}">
+                                <ListBox SelectionMode="Multiple" ItemsSource="{Binding Groups}" 
+                                         SelectedItem="{Binding SelectedGroupToAdd}" DisplayMemberPath="GroupName" />
+                                </Border>
+                                <Border BorderBrush="Gray" BorderThickness="1" CornerRadius="5"
+                                Visibility="{Binding ElementName=RBtnKeywords, Path=IsChecked, Converter={StaticResource BoolToVisibilityConverter}}">
+                                <ListBox SelectionMode="Multiple" ItemsSource="{Binding Keywords}" SelectedItem="{Binding SelectedKeywordToAdd}" DisplayMemberPath="Keyword1" />
+                                </Border>
+                            </Grid>
+                    </Grid>
+                    
+                </materialDesign:Card>-->
+            </Grid>
+
+            <TextBlock Grid.Row="5" Grid.ColumnSpan="2" Foreground="Red" Margin="0 0 0 10" 
+                       HorizontalAlignment="Center" Text="{Binding ErrorMessage, UpdateSourceTrigger=PropertyChanged}" />
+            
+            <!-- Кнопки управления -->
+            <StackPanel
+                        Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" 
+                        HorizontalAlignment="Center">
+                <Button Content="Сохранить" Command="{Binding SaveCommand}" Margin="0 0 0 10" />
+                <Button Content="Закрыть" Command="{Binding CloseCommand}" />
+            </StackPanel>
+        </Grid>
+    </materialDesign:Card>
+</UserControl>

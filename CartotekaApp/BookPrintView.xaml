@@ -1,0 +1,197 @@
+﻿<Window x:Class="CartotekaApp.BookPrintView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        FontSize="14"
+        WindowStyle="None"
+        Background="{DynamicResource MaterialDesignPaper}"
+        Title="Окно данных о книге">
+    <Window.Resources>
+        <Style TargetType="Border">
+            <Setter Property="Margin" Value="10 0 10 10" />
+            <Setter Property="BorderBrush" Value="{DynamicResource PrimaryHueDarkBrush}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Padding" Value="0 1 0 0" />
+            <Setter Property="CornerRadius" Value="5" />
+        </Style>
+        <Style TargetType="materialDesign:Card">
+            <Setter Property="Padding" Value="8" />
+            <Setter Property="materialDesign:ElevationAssist.Elevation" Value="Dp2" />
+        </Style>
+        <Style TargetType="materialDesign:PackIcon">
+            <Setter Property="Foreground" Value="{DynamicResource PrimaryHueMidBrush}" />
+            <Setter Property="Width" Value="25" />
+            <Setter Property="Height" Value="25" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+        <Style TargetType="TextBlock" BasedOn="{StaticResource MaterialDesignTextBlock}">
+            <Setter Property="TextWrapping" Value="Wrap" />
+        </Style>
+    </Window.Resources>
+
+    <Border Height="400" Width="750"
+            Margin="0" Padding="0" 
+            CornerRadius="0" BorderBrush="Black">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <!-- Заголовок -->
+            <materialDesign:ColorZone Mode="PrimaryMid">
+                <StackPanel Orientation="Horizontal" Margin="32 20">
+                    <materialDesign:PackIcon Kind="Database" Foreground="White" Width="30" Height="30" />
+                    <TextBlock FontSize="24" Padding="10 0 0 0" FontWeight="Bold" Text="Данные о книге" />
+                </StackPanel>
+            </materialDesign:ColorZone>
+
+            <Grid Grid.Row="1" Margin="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <!-- Название -->
+                <Border Grid.ColumnSpan="2">
+                    <materialDesign:Card>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
+                                <materialDesign:PackIcon Kind="Book" />
+                                <TextBlock Grid.Row="0" Margin="10 0" Text="Название:"  />
+                            </StackPanel>
+                            <TextBlock Grid.Column="1" Text="{Binding BookName}"  />
+                        </Grid>
+                    </materialDesign:Card>
+                </Border>
+
+
+                <!-- Категория -->
+                <Border Grid.Row="1">
+                    <materialDesign:Card Grid.Row="1">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
+                                <materialDesign:PackIcon Kind="Category" />
+                                <TextBlock Grid.Row="0" Margin="10 0" Text="Категория:"  />
+                            </StackPanel>
+                            <TextBlock Grid.Column="1" Text="{Binding Category.CategoryName}" />
+                        </Grid>
+                    </materialDesign:Card>
+                </Border>
+
+
+                <!-- Отделение -->
+                <Border Grid.Row="2">
+                    <materialDesign:Card Grid.Row="2">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
+                                <materialDesign:PackIcon Kind="Tag" />
+                                <TextBlock Grid.Row="0" Margin="10 0" Text="Отделение:"  />
+                            </StackPanel>
+                            <TextBlock Grid.Column="1" Text="{Binding Otdel}" />
+                        </Grid>
+                    </materialDesign:Card>
+                </Border>
+
+                <!-- Дополнительное описание для книги (кол-во страниц, издательство и др.) -->
+                <Border Grid.Row="3">
+                    <materialDesign:Card Grid.Row="3">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
+                                <materialDesign:PackIcon Kind="FileDocumentBox" />
+                                <TextBlock Grid.Row="0" Margin="10 0" Text="Доп. описание:"  />
+                            </StackPanel>
+                            <TextBlock Grid.Column="1" Text="{Binding BookDesc}" />
+                        </Grid>
+                    </materialDesign:Card>
+                </Border>
+
+                <!-- Авторы -->
+                <Border Grid.Row="1" Grid.Column="1">
+                    <materialDesign:Card Grid.Row="1" Grid.Column="1">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
+                                <materialDesign:PackIcon Kind="AccountMultiple" />
+                                <TextBlock Grid.Row="0" Margin="10 0" Text="Авторы:"  />
+                            </StackPanel>
+                            <TextBlock Grid.Column="1" Text="{Binding AuthorsText}" />
+                        </Grid>
+                    </materialDesign:Card>
+                </Border>
+
+                <!-- Группы -->
+                <Border Grid.Row="2" Grid.Column="1">
+                    <materialDesign:Card Grid.Row="2" Grid.Column="1">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
+                                <materialDesign:PackIcon Kind="AccountGroup" />
+                                <TextBlock Grid.Row="0" Margin="10 0" Text="Группы:"  />
+                            </StackPanel>
+                            <TextBlock Grid.Column="1" Text="{Binding GroupsText}" />
+                        </Grid>
+                    </materialDesign:Card>
+                </Border>
+
+                <!-- Ключевые слова -->
+                <Border Grid.Row="3" Grid.Column="1">
+                    <materialDesign:Card Grid.Row="3" Grid.Column="1">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
+                                <materialDesign:PackIcon Kind="Book" />
+                                <TextBlock Grid.Row="0" Margin="10 0" Text="Ключевые слова:"  />
+                            </StackPanel>
+                            <TextBlock Grid.Column="1" Text="{Binding KeywordsText}" />
+                        </Grid>
+                    </materialDesign:Card>
+                </Border>
+            </Grid>
+        </Grid>
+    </Border>
+</Window>
